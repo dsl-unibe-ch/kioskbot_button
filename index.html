@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://www.unibe.ch/assets/css/main.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.unibe.ch/unibe_theme_portal_2022/css/web.css"
+    />
+    <style>
+      .popup-container {
+        display: none;
+        width: 585px;
+        padding: 48px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        background: #fff;
+        box-shadow: 0 9px 60px 0 rgba(0, 0, 0, 0.25);
+      }
+      .popup-container:popover-open {
+        display: flex;
+        inset: unset;
+        border: none;
+        margin: 0;
+        position: fixed;
+        bottom: 60px;
+        right: 60px;
+      }
+
+      .popup-close-button {
+        background-color: #121212;
+        opacity: 0.4;
+        border: none;
+        height: 45px;
+        width: 45px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .link-button {
+        display: flex;
+        padding: 15px 21px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        background: #d6002b;
+        color: #fff;
+        width: fit-content;
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      class="popup-trigger"
+      aria-label="Bot öffnen"
+      popovertarget="kioskbot"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-bot-message-square-icon lucide-bot-message-square"
+      >
+        <path d="M12 6V2H8" />
+        <path d="M15 11v2" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path
+          d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"
+        />
+        <path d="M9 11v2" />
+      </svg>
+    </button>
+    <div id="kioskbot" class="popup-container" popover>
+      <div class="popup-content">
+        <button class="popup-close-button" aria-label="Schliessen">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.49219 13.6948L13.6956 1.49143"
+              stroke="white"
+              stroke-width="1.62712"
+            />
+            <path
+              d="M13.6953 13.6948L1.49192 1.49143"
+              stroke="white"
+              stroke-width="1.62712"
+            />
+          </svg>
+        </button>
+        <h2>Informationskioskbot der Universität Bern</h2>
+        <p>
+          Der neue KI-basierte Bot beantwortet gerne Ihre Fragen zum Thema
+          Qualitätsmanagement
+        </p>
+        <a
+          href="https://dsl-unibe-ch.github.io/kioskbot_frontend/"
+          class="link-button"
+          target="_blank"
+        >
+          Mehr erfahren
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
