@@ -16,12 +16,15 @@
       .popup-container {
         display: none;
         width: 585px;
+        max-width: 95vw;
         padding: 48px;
         flex-direction: column;
         align-items: flex-start;
         gap: 18px;
         background: #fff;
         box-shadow: 0 9px 60px 0 rgba(0, 0, 0, 0.25);
+        box-sizing: border-box;
+        border-radius: 12px;
       }
       .popup-container:popover-open {
         display: flex;
@@ -31,6 +34,21 @@
         position: fixed;
         bottom: 95px;
         right: 38px;
+        max-width: 95vw;
+        width: 585px;
+      }
+      @media (max-width: 600px) {
+        .popup-container,
+        .popup-container:popover-open {
+          width: 100vw;
+          max-width: 100vw;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: unset;
+          border-radius: 0;
+          padding: 18px 8px 18px 8px;
+        }
       }
 
       .popup-close-button {
