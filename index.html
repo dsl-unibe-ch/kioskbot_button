@@ -82,6 +82,51 @@
           stroke: #fff;
         }
       }
+
+      /* Speech balloon that points to the floating button */
+      .popup-balloon {
+        position: fixed;
+        bottom: calc(
+          12px + 48px + 12px
+        ); /* vertically aligned with the button */
+        right: calc(
+          12px + 48px + 12px
+        ); /* sits to the left of the button with a gap */
+        max-width: 320px;
+        color: #121212;
+        padding: 12px 14px 12px 14px;
+        background: #fff;
+        box-shadow: 0 9px 60px 0 rgba(0, 0, 0, 0.25);
+        z-index: 2; /* above trigger and popover */
+        font-size: 14px;
+        line-height: 1.35;
+        cursor: pointer; /* clickable to open the bot */
+      }
+      .popup-balloon::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        bottom: 18px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid #fff; /* arrow color matches bubble */
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+      }
+      .popup-balloon .popup-close-button {
+        height: 25px;
+        width: 25px;
+      }
+      .popup-balloon .close-balloon:hover {
+        color: #111;
+      }
+      @media (max-width: 600px) {
+        /* Keep UI clean on small screens */
+        .popup-balloon {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -112,6 +157,35 @@
         <path d="M9 11v2" />
       </svg>
     </button>
+    <div class="popup-balloon" role="status" aria-live="polite">
+      <button
+        class="popup-close-button"
+        aria-label="Hinweis ausblenden"
+        title="Schliessen"
+        type="button"
+      >
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.49219 13.6948L13.6956 1.49143"
+            stroke="white"
+            stroke-width="1.62712"
+          />
+          <path
+            d="M13.6953 13.6948L1.49192 1.49143"
+            stroke="white"
+            stroke-width="1.62712"
+          />
+        </svg>
+      </button>
+      Hallo! Haben Sie Fragen zum Inhalt dieser Webseite? Fragen Sie mich, den
+      neuen Chatbot!
+    </div>
     <div id="kioskbot" class="popup-container" popover>
       <div class="popup-content">
         <button
@@ -152,5 +226,40 @@
         </a>
       </div>
     </div>
+    <script>
+      (function () {
+        const balloon = document.querySelector(".popup-balloon");
+        const trigger = document.querySelector(".popup-trigger");
+        if (!balloon || !trigger) return;
+
+        // Respect prior dismissal within the same tab/session
+        const dismissed =
+          sessionStorage.getItem("kioskbotBalloonDismissed") === "1";
+        if (dismissed) {
+          balloon.style.display = "none";
+        }
+
+        // Click anywhere on the balloon (except the close button) to open the bot
+        balloon.addEventListener("click", (e) => {
+          if (e.target.closest(".close-balloon")) return;
+          trigger.click();
+        });
+
+        // Close button hides the balloon and remembers the choice for the session
+        balloon
+          .querySelector(".close-balloon")
+          ?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            balloon.style.display = "none";
+            sessionStorage.setItem("kioskbotBalloonDismissed", "1");
+          });
+
+        // Once the user opens the bot, hide the tip for this session
+        trigger.addEventListener("click", () => {
+          balloon.style.display = "none";
+          sessionStorage.setItem("kioskbotBalloonDismissed", "1");
+        });
+      })();
+    </script>
   </body>
 </html>
