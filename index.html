@@ -53,6 +53,11 @@
         position: absolute;
         top: 0;
         right: 0;
+        display: block;
+        svg {
+          height: unset;
+          width: unset;
+        }
       }
       .link-button {
         display: flex;
@@ -80,7 +85,12 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         svg {
           stroke: #fff;
+          fill: transparent;
         }
+      }
+      button {
+        padding: unset;
+        font-size: unset;
       }
     </style>
   </head>
