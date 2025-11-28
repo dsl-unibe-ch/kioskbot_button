@@ -216,7 +216,7 @@
           Qualitätsmanagement
         </p>
         <a
-          href="https://informationskiosk.unibe.ch/"
+          href="https://informationskiosk.unibe.ch/?url="
           class="link-button"
           target="_blank"
         >
@@ -229,6 +229,9 @@
         const balloon = document.querySelector(".popup-balloon");
         const trigger = document.querySelector(".popup-trigger");
         if (!balloon || !trigger) return;
+
+        document.querySelector(".link-button").attributes.href.value +=
+          encodeURIComponent(window.location.href);
 
         // Respect prior dismissal within the same tab/session
         const dismissed =
