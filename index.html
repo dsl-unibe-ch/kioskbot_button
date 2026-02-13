@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -243,12 +243,12 @@
         document.querySelector(".link-button").attributes.href.value +=
           encodeURIComponent(window.location.href);
 
-        // Respect prior dismissal within the same tab/session
-        const dismissed =
-          sessionStorage.getItem("kioskbotBalloonDismissed") === "1";
-        if (dismissed) {
-          balloon.style.display = "none";
-        }
+        // // Respect prior dismissal within the same tab/session
+        // const dismissed =
+        //   sessionStorage.getItem("kioskbotBalloonDismissed") === "1";
+        // if (dismissed) {
+        //   balloon.style.display = "none";
+        // }
 
         // Click anywhere on the balloon (except the close button) to open the bot
         balloon.addEventListener("click", (e) => {
@@ -262,13 +262,13 @@
           ?.addEventListener("click", (e) => {
             e.stopPropagation();
             balloon.style.display = "none";
-            sessionStorage.setItem("kioskbotBalloonDismissed", "1");
+            // sessionStorage.setItem("kioskbotBalloonDismissed", "1");
           });
 
         // Once the user opens the bot, hide the tip for this session
         trigger.addEventListener("click", () => {
           balloon.style.display = "none";
-          sessionStorage.setItem("kioskbotBalloonDismissed", "1");
+          // sessionStorage.setItem("kioskbotBalloonDismissed", "1");
         });
       })();
     </script>
